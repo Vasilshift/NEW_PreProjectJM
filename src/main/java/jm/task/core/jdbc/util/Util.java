@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Util {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/testx?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false&serverTimeZone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "linline011";
 
