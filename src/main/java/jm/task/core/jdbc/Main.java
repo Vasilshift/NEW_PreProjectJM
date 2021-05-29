@@ -22,8 +22,8 @@ public class Main {
 //        UserService userService = new UserServiceImpl();       //строка от Максима
 //        userService.getAllUsers();                              //строка от Максима
 
-        Util connect = new Util();
-        connect.connectUtil();
+//        Util connect = new Util();
+//        connect
         UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
         userDaoJDBC.createUsersTable();
         //userDaoJDBC.getAllUsers();

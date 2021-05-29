@@ -10,8 +10,8 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
 
     private Statement statement;
-    private Connection connection;
-    Util connect = new Util();
+    private Connection connection = Util.getConnection();
+    //Util connect = new Util();
 
     public UserDaoJDBCImpl() {
     }
@@ -19,14 +19,13 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() throws SQLException {
         //Connection connection = null;
         try {
-            connect.connectUtil();
             String query = "CREATE TABLE IF NOT EXISTS 'testx'.'table5' (\n" +
                     " `id` INT NOT NULL AUTO_INCREMENT,\n" +
                     " `name` VARCHAR(45) NULL,\n" +
                     " `lastName` VARCHAR(45) NULL,\n" +
                     " `age` TINYINT NULL,\n" +
                     "  PRIMARY KEY (`id`));";
-            Statement statement = connect.getConnection().createStatement();
+            Statement statement = connection.createStatement();
             statement.executeQuery(query);
             ResultSet resultSet = statement.executeQuery(query);
 
@@ -77,7 +76,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "delete from test.userx where id = ?");
+                    "delete from `testx`.`table5` where id = ?");
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
             System.out.printf("Пользователь с id %d удалён из базы данных.\n", id);
@@ -91,7 +90,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String query = "SELECT * FROM 'testx'.'table5';";
         List<User> list = new ArrayList<>();
         try {
-            Statement statement = connect.getConnection().createStatement();
+            Statement statement = connection.createStatement();
             statement.executeQuery(query);
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
@@ -110,7 +109,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String query = "DELETE FROM `testx`.`table5`;";
         try {
-            Statement statement = connect.getConnection().createStatement();
+            Statement statement = connection.createStatement();
             statement.executeQuery(query);
             ResultSet resultSet = statement.executeQuery(query);
 

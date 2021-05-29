@@ -1,33 +1,24 @@
 package jm.task.core.jdbc.util;
-
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 public class Util {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false&serverTimeZone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/testx?useSSL=false&serverTimeZone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "linline011";
-
-    private Connection connection;
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void connectUtil() throws SQLException {
+    public static Connection getConnection() {
+        Connection connection = null;
         try {
             Driver driver = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(driver);
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             if(!connection.isClosed()){
                 System.out.println("Соединение с БД установлено.");
             }
         } catch (SQLException e) {
             System.out.println("Не удалось загрузить класс драйвера.");
         }
-        //return connection;
-        //connection.close();
+        return connection;
     }
-
-
 }
