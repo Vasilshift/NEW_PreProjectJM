@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="testx@localhost" uuid="9a0b749a-5870-41d3-90e9-8b40417d8742">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/testx</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="MySQL" uuid="ae4bde14-e80e-4290-b39f-fa33b635aa23">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
@@ -15,17 +8,6 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>mysql://localhost:3306/test?useSSL=false&amp;serverTimeZone=UTC</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="test@localhost" uuid="70b858ee-51b2-49aa-b127-eef285288cbb">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <remarks>new bsae300521</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/test</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-      <driver-properties>
-        <property name="serverTimezone" value="serverTimeZone=UTC" />
-      </driver-properties>
     </data-source>
     <data-source source="LOCAL" name="test@localhost [2]" uuid="0b243543-ce53-4c1c-adde-65b32e72e2d4">
       <driver-ref>mysql.8</driver-ref>
