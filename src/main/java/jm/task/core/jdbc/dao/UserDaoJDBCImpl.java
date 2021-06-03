@@ -82,13 +82,13 @@ public class UserDaoJDBCImpl implements UserDao {
             stmt2.executeUpdate();
             System.out.printf("Пользователь с именем %s добавлен в базу данных.", name);
             connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             try {
                 connection.close();
-            } catch (Exception throwables) {
-                throwables.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
