@@ -24,27 +24,27 @@ public class Main {
 //
 //        userService.dropUsersTable();
 //        userService.createUsersTable();
-//
+//************************************************************************
+
 //        userService.saveUser("Tik", "Ernom", (byte) 45);
 //        userService.saveUser("Rik", "Kilon", (byte) 89);
 //        userService.saveUser("Sam", "Nikon", (byte) 12);
 //        userService.saveUser("Rom", "Polen", (byte) 34);
+//
 
         Connection connection = Util.getConnection();
         UserService userService = new UserServiceImpl();
         userService.dropUsersTable();
         userService.createUsersTable();
 
-        try {
-            connection = Util.getConnection();
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO test.table10 (name, lastName, age  ) VALUES (" + "Rick" + "," + "Noi" + "," +
-            45 + ");");
-        } catch (Exception e ) {
-            e.printStackTrace();
-        }
-
-
+//        try {
+//            connection = Util.getConnection();
+//            Statement statement = connection.createStatement();
+//            statement.executeUpdate("INSERT INTO test.table10 (name, lastName, age  ) VALUES (" + "Rick" + "," + "Noi" + "," +
+//            45 + ");");
+//        } catch (Exception e ) {
+//            e.printStackTrace();
+//        }
 
 
 

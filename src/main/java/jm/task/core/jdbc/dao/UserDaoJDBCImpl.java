@@ -18,7 +18,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() throws SQLException {
-        //Connection connection = null;
+        Connection connection = null;
 
         try {
             connection = Util.getConnection();
@@ -33,6 +33,12 @@ public class UserDaoJDBCImpl implements UserDao {
             //ResultSet resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
                 e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -44,31 +50,46 @@ public class UserDaoJDBCImpl implements UserDao {
                 //statement.executeBatch();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
     }
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
 
         try {
-//            connection = Util.getConnection();
-//            String query = "INSERT INTO test.table10 (name, lastName, age  ) VALUES (?,?,?);";
-//            statement = connection.createStatement();
-//            preparedStatement.setString(1, name);
-//            preparedStatement.setString(2, lastName);
-//            preparedStatement.setByte(3, age);
-
-            //**************************************************
             connection = Util.getConnection();
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO test.table10 (name, lastName, age  ) VALUES ("+name+ "," +lastName+ "," +
-                    age+");");
 
+            String query = "INSERT INTO test.table10 (name, lastName, age  ) VALUES (?,?,?);";
+            PreparedStatement stmt2 = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setByte(3, age);
+
+            //**************************Don't work correct ******************
+//            connection = Util.getConnection();
+//            statement = connection.createStatement();
+//            statement.executeUpdate("INSERT INTO test.table10 (name, lastName, age  ) VALUES ("+name+ "," +lastName+ "," +
+//                    age+");");
             //**************************************************
 
-            //preparedStatement.execute(query);
+            stmt2.executeUpdate();
             System.out.printf("Пользователь с именем %s добавлен в базу данных.", name);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 
@@ -82,6 +103,12 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.printf("Пользователь с id %d удалён из базы данных.\n", id);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -104,6 +131,12 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }
@@ -117,6 +150,12 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("Таблица очищена.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
