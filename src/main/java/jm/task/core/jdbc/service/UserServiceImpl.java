@@ -27,11 +27,11 @@ public class UserServiceImpl implements UserService {
         userdao.removeUserById(id);
     }
 
-    public List<User> getAllUsers() {
-        return null;
+    public List<User> getAllUsers() throws SQLException {
+        return userdao.getAllUsers();
     }
 
-    public void cleanUsersTable() {
+    public void cleanUsersTable() throws SQLException{
         userdao.cleanUsersTable();
     }
 }

@@ -30,25 +30,5 @@ public class Util {
         return connection;
     }
 
-//    public static Statement getStatement(){
-//        Connection connection = getConnection();
-//        Statement statement = null;
-//        try {
-//            statement = connection.createStatement();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return statement;
-//    }
-//
-//    public static PreparedStatement getPrStatement(String sql){
-//        Connection connection = getConnection();
-//        PreparedStatement statement = null;
-//        try {
-//            statement = connection.prepareStatement(sql);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return statement;
-//    }
+
 }
