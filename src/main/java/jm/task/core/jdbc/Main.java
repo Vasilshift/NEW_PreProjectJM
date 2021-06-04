@@ -13,9 +13,6 @@ import java.util.List;
 
 public class Main {
 
-    //private static Util connect;
-    //private static Statement statement;
-
     public static void main(String[] args) throws SQLException {
 
         Connection connection = Util.getConnection();

@@ -20,15 +20,13 @@ public class Util {
         } catch (SQLException e) {
             System.out.println("Не удалось загрузить класс драйвера.");
         }
-//        finally {
-//            try {
-//                connection.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+
         return connection;
     }
+
+
+
+
 
 
 }
