@@ -1,6 +1,6 @@
 package jm.task.core.jdbc.dao;
 
-import jm.task.core.jdbc.Entity.table10;
+import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,20 +37,20 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-        session.get(table10.class,1L);
+//        session.get(User.class,1L);
     }
 
     @Override
-    public List<table10> getAllUsers() {
+    public List<User> getAllUsers() {
         Session session = sessionFactory.openSession();
 
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(table10.class);
-        Root<table10> root = criteriaQuery.from(table10.class);
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
         Query query = session.createQuery(criteriaQuery);
-        List<table10> user = query.getResultList();
+        List<User> user = query.getResultList();
         session.close();
         return user;
 
