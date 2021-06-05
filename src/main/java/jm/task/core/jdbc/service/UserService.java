@@ -1,6 +1,6 @@
 package jm.task.core.jdbc.service;
 
-import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.Entity.table10;
 
 import java.sql.SQLException;
 import java.util.List;

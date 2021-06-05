@@ -1,18 +1,16 @@
 package jm.task.core.jdbc.dao;
 
+import jm.task.core.jdbc.Entity.table10;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UserDaoJDBCImpl implements UserDao {
 
     private Statement statement;
     private Connection connection;
-    //Util connect = new Util();
-    //PreparedStatement preparedStatement;
 
     public UserDaoJDBCImpl() {
     }
@@ -79,7 +77,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers ()  {
+    public List <User> getAllUsers ()  {
         List<User> list = new ArrayList<>();
         try (Connection connection = Util.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM test.table10;");
@@ -99,13 +97,13 @@ public class UserDaoJDBCImpl implements UserDao {
             return list;
     }
 
-        public void cleanUsersTable () throws SQLException {
-            try (Connection connection = Util.getConnection()) {
-                statement = connection.createStatement();
-                statement.execute("DELETE FROM test.table10;");
-                System.out.println("Таблица очищена.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public void cleanUsersTable () throws SQLException {
+        try (Connection connection = Util.getConnection()) {
+            statement = connection.createStatement();
+            statement.execute("DELETE FROM test.table10;");
+            System.out.println("Таблица очищена.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 }
