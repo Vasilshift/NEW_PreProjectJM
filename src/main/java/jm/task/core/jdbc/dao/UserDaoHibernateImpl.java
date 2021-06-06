@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -10,15 +9,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import javax.persistence.criteria.*;
 
 public class UserDaoHibernateImpl implements UserDao {
 
     private SessionFactory sessionFactory;
 
     public UserDaoHibernateImpl() {
-        sessionFactory = HibernateUtil.getSessionFactory();
-    }
 
+    }
 
     @Override
     public void createUsersTable() {
@@ -43,8 +42,6 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         Session session = sessionFactory.openSession();
-
-
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
@@ -53,7 +50,6 @@ public class UserDaoHibernateImpl implements UserDao {
         List<User> user = query.getResultList();
         session.close();
         return user;
-
     }
 
     @Override
