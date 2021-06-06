@@ -18,17 +18,24 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        SessionFactory sessionFactory = Util.getSessionFactory();
-        Session session = Util.getSessionFactory().openSession();
 
-//        for (User user : new UserDaoHibernateImpl().getAllUsers()
-//             ) {
-//            System.out.println("users from table: " + user.getName());
-//        }
+        //SessionFactory sessionFactory = Util.getSessionFactory();
+        UserService userService = new UserServiceImpl();
 
+        userService.dropUsersTable();
 
+        userService.createUsersTable();
+
+        userService.saveUser("Tik", "Ernom", (byte) 45);
+        userService.saveUser("Rik", "Kilon", (byte) 89);
+        userService.saveUser("Sam", "Nikon", (byte) 12);
+        userService.saveUser("Rom", "Polen", (byte) 34);
+
+        userService.getAllUsers();
+        userService.cleanUsersTable();
 
     }
-
 }
+
+
 
