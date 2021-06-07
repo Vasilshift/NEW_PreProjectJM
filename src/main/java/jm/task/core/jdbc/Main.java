@@ -9,32 +9,24 @@ import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-//import jm.task.core.jdbc.util.Util;
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//Task done 06/06/21 at 19:00. All work 
+//Task done 06/06/21 at 19:00. All work
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-
-        //SessionFactory sessionFactory = Util.getSessionFactory();
         UserService userService = new UserServiceImpl();
-
         userService.dropUsersTable();
-
         userService.createUsersTable();
-
         userService.saveUser("Tik", "Ernom", (byte) 45);
         userService.saveUser("Rik", "Kilon", (byte) 89);
         userService.saveUser("Sam", "Nikon", (byte) 12);
         userService.saveUser("Rom", "Polen", (byte) 34);
-
         userService.getAllUsers();
         userService.cleanUsersTable();
-
     }
 }
 
