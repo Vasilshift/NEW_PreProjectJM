@@ -4,7 +4,9 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import java.sql.*;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,6 +18,8 @@ import javax.persistence.criteria.*;
 public class UserDaoHibernateImpl implements UserDao {
 
     private SessionFactory sessionFactory = Util.getSessionFactory();
+    private Session session;
+    //Transaction transaction = session.getTransaction();
 
     public UserDaoHibernateImpl() {
     }
@@ -31,7 +35,16 @@ public class UserDaoHibernateImpl implements UserDao {
                     "                  PRIMARY KEY (`id`));").
                     executeUpdate();
             session.getTransaction().commit();
+            session.close();
         } catch (Exception e) {
+            if (session != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    session.getTransaction().rollback();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
             e.printStackTrace();
         }
         System.out.println("Table created!");
@@ -46,6 +59,14 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
             System.out.println("Table created!");
         } catch (Exception e) {
+            if (session != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    session.getTransaction().rollback();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
             e.printStackTrace();
         }
     }
@@ -59,6 +80,14 @@ public class UserDaoHibernateImpl implements UserDao {
             session.getTransaction().commit();
             System.out.println("user added!");
         } catch (Exception e) {
+            if (session != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    session.getTransaction().rollback();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
             e.printStackTrace();
         }
     }
@@ -71,6 +100,14 @@ public class UserDaoHibernateImpl implements UserDao {
             session.delete(user);
             session.getTransaction().commit();
         } catch (Exception e) {
+            if (session != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    session.getTransaction().rollback();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
             e.printStackTrace();
         }
         System.out.println("user removed");
@@ -95,6 +132,14 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("TRUNCATE TABLE User;").executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
+            if (session != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    session.getTransaction().rollback();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
             e.printStackTrace();
         }
         System.out.println("Table cleaned");
