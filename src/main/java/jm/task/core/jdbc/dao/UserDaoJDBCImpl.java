@@ -24,6 +24,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     "  PRIMARY KEY (`id`));";
             statement = connection.createStatement();
             statement.execute(query);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,6 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Connection connection = Util.getConnection()) {
             statement = connection.createStatement();
             statement.execute("DROP TABLE IF EXISTS test.table10;");
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,6 +49,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setByte(3, age);
             preparedStatement.execute();
             System.out.printf("Пользователь с именем %s добавлен в базу данных.", name);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,6 +61,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
             System.out.printf("Пользователь с id %d удалён из базы данных", id);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,6 +81,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 list.add(user);
                 System.out.println(user);
             }
+            statement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,6 +93,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             statement.execute("TRUNCATE TABLE test.table10;");
             System.out.println("Таблица очищена.");
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
