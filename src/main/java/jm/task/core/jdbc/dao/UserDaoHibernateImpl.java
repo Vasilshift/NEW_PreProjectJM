@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.criteria.*;
 
@@ -21,37 +22,45 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        SessionFactory sessionFactory = Util.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        session.createSQLQuery("CREATE TABLE IF NOT EXISTS test.User (`id` INT NOT NULL AUTO_INCREMENT," +
-                "                     `name` VARCHAR(45) NULL," +
-                "                     `lastName` VARCHAR(45) NULL," +
-                "                     `age` TINYINT NULL," +
-                "                     PRIMARY KEY (`id`));").executeUpdate();
-        session.getTransaction().commit();
+        try (Session session = sessionFactory.getCurrentSession();) {
+            session.beginTransaction();
+            session.createSQLQuery("CREATE TABLE IF NOT EXISTS test.User (`id` INT NOT NULL AUTO_INCREMENT," +
+                    "                 `name` VARCHAR(45) NULL," +
+                    "                 `lastName` VARCHAR(45) NULL," +
+                    "                 `age` TINYINT NULL," +
+                    "                  PRIMARY KEY (`id`));").
+                    executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Table created!");
     }
 
     @Override
     public void dropUsersTable() {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        session.createSQLQuery("DROP TABLE IF EXISTS test.User;").executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-        System.out.println("Table created!");
+        try (Session session = sessionFactory.getCurrentSession();) {
+            session.beginTransaction();
+            session.createSQLQuery("DROP TABLE IF EXISTS test.User;").executeUpdate();
+            session.getTransaction().commit();
+            session.close();
+            System.out.println("Table created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        SessionFactory sessionFactory = Util.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        User user = new User(name, lastName, age);
-        session.save(user);
-        session.getTransaction().commit();
-        System.out.println("user added!");
+        try (Session session = sessionFactory.getCurrentSession();) {
+            session.beginTransaction();
+            User user = new User(name, lastName, age);
+            session.save(user);
+            session.getTransaction().commit();
+            System.out.println("user added!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -61,8 +70,10 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = session.get(User.class, id);
             session.delete(user);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("user added!");
+        System.out.println("user removed");
     }
 
     @Override
@@ -81,8 +92,10 @@ public class UserDaoHibernateImpl implements UserDao {
     public void cleanUsersTable() {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            session.createQuery("DELETE FROM User").executeUpdate();
+            session.createQuery("TRUNCATE FROM User").executeUpdate();
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         System.out.println("Table cleaned");
     }
