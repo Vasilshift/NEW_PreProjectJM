@@ -35,20 +35,17 @@ public class UserDaoHibernateImpl implements UserDao {
                     "                  PRIMARY KEY (`id`));").
                     executeUpdate();
             session.getTransaction().commit();
+            System.out.println("Table created!");
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
-            }
-            e.printStackTrace();
+                System.err.print("Transaction is being rolled back");
+                session.getTransaction().rollback();
+            } e.printStackTrace();
         }
-        System.out.println("Table created!");
     }
+
+
 
     @Override
     public void dropUsersTable() {
@@ -60,12 +57,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
                     System.err.print("Transaction is being rolled back");
                     session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
             }
             e.printStackTrace();
         }
@@ -82,12 +75,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                System.err.print("Transaction is being rolled back");
+                session.getTransaction().rollback();
             }
             e.printStackTrace();
         }
@@ -103,12 +92,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                System.err.print("Transaction is being rolled back");
+                session.getTransaction().rollback();
             }
             e.printStackTrace();
         }
@@ -130,12 +115,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                System.err.print("Transaction is being rolled back");
+                session.getTransaction().rollback();
             }
             e.printStackTrace();
         }
@@ -151,12 +132,8 @@ public class UserDaoHibernateImpl implements UserDao {
             session.close();
         } catch (Exception e) {
             if (session != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    session.getTransaction().rollback();
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                System.err.print("Transaction is being rolled back");
+                session.getTransaction().rollback();
             }
             e.printStackTrace();
         }
