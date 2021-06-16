@@ -3,7 +3,7 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import java.sql.*;
-//Work variant. Rebuiided codestyle 07/06/21 19:05
+//Work variant. Add .close()   16/06/21  18-50
 public class Main {
 
     public static void main(String[] args) throws SQLException {

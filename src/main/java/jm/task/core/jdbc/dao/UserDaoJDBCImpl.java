@@ -9,7 +9,6 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
 
     private Statement statement;
-    //private Connection connection;
 
     public UserDaoJDBCImpl() {
     }
@@ -25,6 +24,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             statement.execute(query);
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,6 +35,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement = connection.createStatement();
             statement.execute("DROP TABLE IF EXISTS test.table10;");
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,6 +51,8 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.execute();
             System.out.printf("Пользователь с именем %s добавлен в базу данных.", name);
             statement.close();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,6 +65,8 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.execute();
             System.out.printf("Пользователь с id %d удалён из базы данных", id);
             statement.close();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,6 +87,9 @@ public class UserDaoJDBCImpl implements UserDao {
                 System.out.println(user);
             }
             statement.close();
+            preparedStatement.close();
+            connection.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,6 +102,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.execute("TRUNCATE TABLE test.table10;");
             System.out.println("Таблица очищена.");
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
