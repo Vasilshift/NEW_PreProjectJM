@@ -15,7 +15,14 @@ public class Util {
 
     private static Util instance;
 
-    private Util(){ };
+    private Util(){};
+
+    public static Util getInstance() {
+        if (instance == null){
+            instance = new Util();
+        }
+        return instance;
+    }
 
     private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false&serverTimeZone=UTC";
     private static final String USERNAME = "root";

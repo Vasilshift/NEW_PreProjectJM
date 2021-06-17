@@ -18,7 +18,7 @@ import javax.persistence.criteria.*;
 
 public class UserDaoHibernateImpl implements UserDao {
 
-    private SessionFactory sessionFactory = Util.getSessionFactory();
+    private SessionFactory sessionFactory = Util.getInstance().getSessionFactory();
     private Session session;
 
     public UserDaoHibernateImpl() {
@@ -37,6 +37,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.getTransaction().commit();
             System.out.println("Table created!");
             session.close();
+            //sessionFactory.close();
         } catch (Exception e) {
             if (session != null) {
                 System.err.print("Transaction is being rolled back");
@@ -108,10 +109,6 @@ public class UserDaoHibernateImpl implements UserDao {
             Transaction transaction = session.beginTransaction();
             list = session.createQuery(query).getResultList();
             transaction.commit();
-
-            for (User user : list ) {
-                System.out.println(user);
-            }
             session.close();
         } catch (Exception e) {
             if (session != null) {
