@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="NEW_PreProjectJM" />
+        <module name="1-1-4_NEW_PreProjectJM" />
       </profile>
     </annotationProcessing>
   </component>
